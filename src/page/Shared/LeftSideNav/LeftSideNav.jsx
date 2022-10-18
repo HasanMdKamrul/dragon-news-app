@@ -22,7 +22,7 @@ const LeftSideNav = () => {
 
   return (
     <div>
-      <h4>All Categories</h4>
+      <h5>News:{categories.length}</h5>
       {categories.map((category) => (
         <CategoryComponent key={category.id} category={category} />
       ))}

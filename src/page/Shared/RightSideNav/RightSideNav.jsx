@@ -1,5 +1,6 @@
 import React from "react";
 import AuthenticationButtons from "../AuthenticationButtons/AuthenticationButtons";
+import RightSideCarosal from "../RightSideCarosal/RightSideCarosal";
 import SocialHandles from "../SocialHandles/SocialHandles";
 
 const RightSideNav = () => {
@@ -12,6 +13,7 @@ const RightSideNav = () => {
         {/* ** Social Handles */}
         <SocialHandles />
       </div>
+      <RightSideCarosal />
     </div>
   );
 };

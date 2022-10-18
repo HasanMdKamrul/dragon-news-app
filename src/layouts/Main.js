@@ -13,7 +13,9 @@ const Main = () => {
       <Container>
         <Row>
           <Col lg="2">
-            <LeftSideNav />
+            <div className=" d-lg-block d-none">
+              <LeftSideNav />
+            </div>
           </Col>
           <Col lg="7">
             <Outlet />
