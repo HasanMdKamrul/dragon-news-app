@@ -7,7 +7,13 @@ import LeftSideNav from "../../LeftSideNav/LeftSideNav";
 
 const Header = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+    <Navbar
+      className="mb-3"
+      collapseOnSelect
+      expand="lg"
+      bg="light"
+      variant="light"
+    >
       <Container>
         <Navbar.Brand href="#home">Dragon-News</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -29,12 +35,10 @@ const Header = () => {
           </Nav>
           <Nav>
             <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Dank memes
-              <div className="d-block d-lg-none">
-                <LeftSideNav />
-              </div>
-            </Nav.Link>
+
+            <div className="d-block d-lg-none">
+              <LeftSideNav />
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>
