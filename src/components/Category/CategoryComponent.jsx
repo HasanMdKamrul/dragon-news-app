@@ -5,7 +5,7 @@ const CategoryComponent = ({ category }) => {
   const { name, id } = category;
   return (
     <div>
-      <Link href={`/category/${id}`}>{name}</Link>
+      <Link to={`/category/${id}`}>{name}</Link>
     </div>
   );
 };
