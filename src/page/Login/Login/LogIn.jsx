@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const LogIn = () => {
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { logIn } = useContext(AuthContext);
 
@@ -18,6 +21,9 @@ const LogIn = () => {
       try {
         await logIn(email, password);
         console.log("user logged in");
+        navigate("/");
+        form.reset();
+        setError("");
       } catch (error) {
         setError(error.message);
       }
@@ -47,10 +53,10 @@ const LogIn = () => {
         />
       </Form.Group>
 
-      <Form.Text className="text-muted">{error}</Form.Text>
       <Button variant="primary" type="submit">
         Login
       </Button>
+      <Form.Text className="text-danger">{error}</Form.Text>
     </Form>
   );
 };

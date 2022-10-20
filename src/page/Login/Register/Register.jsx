@@ -80,10 +80,10 @@ const Register = () => {
           />
         </Form.Group>
 
-        <Form.Text className="text-muted">{error}</Form.Text>
         <Button variant="primary" type="submit">
           Login
         </Button>
+        <Form.Text className="text-danger">{error}</Form.Text>
       </Form>
     </div>
   );
