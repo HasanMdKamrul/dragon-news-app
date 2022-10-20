@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -28,6 +29,13 @@ const useFirebase = () => {
     return signOut(auth);
   };
 
+  //   ** signin
+
+  const logIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   //   ** on auth state change
 
   useEffect(() => {
@@ -47,7 +55,7 @@ const useFirebase = () => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const authInfo = { providerLogin, user, loading, logOut, register };
+  const authInfo = { providerLogin, user, loading, logOut, register, logIn };
 
   return authInfo;
 };
