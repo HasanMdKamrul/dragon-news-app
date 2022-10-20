@@ -1,4 +1,10 @@
-import { getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
 
@@ -15,6 +21,13 @@ const useFirebase = () => {
     return signInWithPopup(auth, provider);
   };
 
+  //   * signout
+
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
   //   ** on auth state change
 
   useEffect(() => {
@@ -27,7 +40,14 @@ const useFirebase = () => {
     return () => unsubscribe();
   }, []);
 
-  const authInfo = { providerLogin, user, loading };
+  //   ** register
+
+  const register = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const authInfo = { providerLogin, user, loading, logOut, register };
 
   return authInfo;
 };

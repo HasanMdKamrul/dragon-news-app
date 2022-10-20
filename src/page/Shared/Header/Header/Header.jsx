@@ -10,7 +10,13 @@ import { AuthContext } from "../../../../contexts/AuthProvider/AuthProvider";
 import LeftSideNav from "../../LeftSideNav/LeftSideNav";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const signOutHandle = () => {
+    logOut()
+      .then(() => console.log("user logged out"))
+      .catch((e) => console.error(e.message));
+  };
 
   return (
     <Navbar
@@ -40,12 +46,27 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">{user ? user.displayName : ""}</Nav.Link>
-            <Image
-              style={{ height: "30px" }}
-              roundedCircle
-              src={user.photoURL ? user.photoURL : <FaUser />}
-            />
+            <Nav.Link href="#deets">
+              {user?.uid ? user?.displayName : ""}
+            </Nav.Link>
+            {user?.uid ? (
+              <button onClick={signOutHandle}>SignOut</button>
+            ) : (
+              <>
+                <Link to="/login">LogIn</Link>
+                <Link to="/register">Register</Link>
+              </>
+            )}
+
+            {user?.photoURL ? (
+              <Image
+                style={{ height: "30px" }}
+                roundedCircle
+                src={user?.photoURL}
+              />
+            ) : (
+              <FaUser />
+            )}
 
             <div className="d-block d-lg-none">
               <LeftSideNav />
