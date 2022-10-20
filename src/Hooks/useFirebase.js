@@ -27,7 +27,7 @@ const useFirebase = () => {
     return () => unsubscribe();
   }, []);
 
-  const authInfo = { providerLogin, user };
+  const authInfo = { providerLogin, user, loading };
 
   return authInfo;
 };

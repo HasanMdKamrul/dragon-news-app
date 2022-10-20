@@ -51,6 +51,7 @@ const NewsSummaryCard = ({ news }) => {
         </div>
         <div>
           <FaEye />
+          <span>{total_view ? total_view : "n/a"}</span>
         </div>
       </Card.Footer>
     </Card>

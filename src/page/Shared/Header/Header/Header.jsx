@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../contexts/AuthProvider/AuthProvider";
 import LeftSideNav from "../../LeftSideNav/LeftSideNav";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <Navbar
       className="mb-3"
@@ -35,7 +40,12 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">JJJ</Nav.Link>
+            <Nav.Link href="#deets">{user ? user.displayName : ""}</Nav.Link>
+            <Image
+              style={{ height: "30px" }}
+              roundedCircle
+              src={user.photoURL ? user.photoURL : <FaUser />}
+            />
 
             <div className="d-block d-lg-none">
               <LeftSideNav />
