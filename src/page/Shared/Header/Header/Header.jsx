@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
 import LeftSideNav from "../../LeftSideNav/LeftSideNav";
 
 const Header = () => {
@@ -15,7 +16,7 @@ const Header = () => {
       variant="light"
     >
       <Container>
-        <Navbar.Brand href="#home">Dragon-News</Navbar.Brand>
+        <Link to="/">Dragon-News</Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -34,7 +35,7 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
+            <Nav.Link href="#deets">JJJ</Nav.Link>
 
             <div className="d-block d-lg-none">
               <LeftSideNav />
