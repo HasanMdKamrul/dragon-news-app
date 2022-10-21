@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
@@ -8,8 +9,9 @@ const Register = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [accepted, setAccepted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  console.log(accepted);
+  //   console.log(accepted);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -58,6 +60,10 @@ const Register = () => {
     setAccepted(event.target.checked);
   };
 
+  const passwordShowHandler = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div>
       <Form onSubmit={handleSubmit}>
@@ -86,12 +92,34 @@ const Register = () => {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            required
-            name="password"
-            type="password"
-            placeholder="Password"
-          />
+          {showPassword ? (
+            <Form.Control
+              className="d-inline"
+              required
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+          ) : (
+            <Form.Control
+              className="d-inline"
+              required
+              name="password"
+              type="text"
+              placeholder="Password"
+            />
+          )}
+          {showPassword ? (
+            <FaEye
+              onClick={passwordShowHandler}
+              style={{ marginLeft: "-30px" }}
+            />
+          ) : (
+            <FaEyeSlash
+              onClick={passwordShowHandler}
+              style={{ marginLeft: "-30px" }}
+            />
+          )}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check
