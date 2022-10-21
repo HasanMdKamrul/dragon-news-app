@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -61,7 +62,12 @@ const useFirebase = () => {
     return updateProfile(auth.currentUser, profile);
   };
 
+  //   ** email verification
+
+  const emailVerify = () => sendEmailVerification(auth.currentUser);
+
   const authInfo = {
+    emailVerify,
     providerLogin,
     user,
     loading,

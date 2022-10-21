@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
@@ -17,7 +18,7 @@ const Register = () => {
 
   const from = location.state?.from?.pathname || "/";
 
-  const { register, userProfileUpdate } = useContext(AuthContext);
+  const { register, userProfileUpdate, emailVerify } = useContext(AuthContext);
 
   const handleEmail = (event) => {
     event.preventDefault();
@@ -33,6 +34,14 @@ const Register = () => {
   const userProfileUpdater = async (profile) => {
     try {
       await userProfileUpdate(profile);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const userEmailVeification = async () => {
+    try {
+      await emailVerify();
     } catch (error) {
       setError(error.message);
     }
@@ -61,6 +70,8 @@ const Register = () => {
         form.reset();
         setError("");
         userProfileUpdater(profile);
+        userEmailVeification();
+        toast.success(`Verification email has been sent to!${email}`);
         navigate(from, { replace: true });
       } catch (error) {
         setError(error.message);
