@@ -1,11 +1,17 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const { register } = useContext(AuthContext);
 
@@ -36,6 +42,8 @@ const Register = () => {
         await register(email, password);
         console.log("user created");
         form.reset();
+        setError("");
+        navigate(from, { replace: true });
       } catch (error) {
         setError(error.message);
       }
@@ -81,7 +89,7 @@ const Register = () => {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Login
+          Register
         </Button>
         <Form.Text className="text-danger">{error}</Form.Text>
       </Form>

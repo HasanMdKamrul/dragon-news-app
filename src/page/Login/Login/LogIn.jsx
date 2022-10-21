@@ -9,6 +9,10 @@ const LogIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log(location);
+
+  const from = location.state?.from?.pathname || "/";
+
   const { logIn } = useContext(AuthContext);
 
   const submitHandler = (event) => {
@@ -21,7 +25,7 @@ const LogIn = () => {
       try {
         await logIn(email, password);
         console.log("user logged in");
-        navigate("/");
+        navigate(from, { replace: true });
         form.reset();
         setError("");
       } catch (error) {
