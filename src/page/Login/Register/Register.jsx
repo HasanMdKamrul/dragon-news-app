@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
+  const [accepted, setAccepted] = useState(false);
 
+  console.log(accepted);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -52,6 +54,10 @@ const Register = () => {
     registerUser();
   };
 
+  const handleAccept = (event) => {
+    setAccepted(event.target.checked);
+  };
+
   return (
     <div>
       <Form onSubmit={handleSubmit}>
@@ -87,8 +93,18 @@ const Register = () => {
             placeholder="Password"
           />
         </Form.Group>
-
-        <Button variant="primary" type="submit">
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Check
+            onClick={handleAccept}
+            type="checkbox"
+            label={
+              <>
+                Accept <Link to="/terms">terms and conditions</Link>{" "}
+              </>
+            }
+          />
+        </Form.Group>
+        <Button disabled={!accepted} variant="primary" type="submit">
           Register
         </Button>
         <Form.Text className="text-danger">{error}</Form.Text>
