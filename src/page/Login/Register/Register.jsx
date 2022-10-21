@@ -17,7 +17,7 @@ const Register = () => {
 
   const from = location.state?.from?.pathname || "/";
 
-  const { register } = useContext(AuthContext);
+  const { register, userProfileUpdate } = useContext(AuthContext);
 
   const handleEmail = (event) => {
     event.preventDefault();
@@ -30,6 +30,14 @@ const Register = () => {
     }
   };
 
+  const userProfileUpdater = async (profile) => {
+    try {
+      await userProfileUpdate(profile);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -39,6 +47,11 @@ const Register = () => {
     const photoURL = form.photoURL.value;
     const password = form.password.value;
 
+    const profile = {
+      displayName: name,
+      photoURL,
+    };
+
     // ** register
 
     const registerUser = async () => {
@@ -47,6 +60,7 @@ const Register = () => {
         console.log("user created");
         form.reset();
         setError("");
+        userProfileUpdater(profile);
         navigate(from, { replace: true });
       } catch (error) {
         setError(error.message);
