@@ -10,11 +10,12 @@ const LogIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location);
+  console.log(error);
 
   const from = location.state?.from?.pathname || "/";
 
-  const { logIn, user } = useContext(AuthContext);
+  const { logIn, user, setLoading } = useContext(AuthContext);
+  console.log(user);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -24,9 +25,9 @@ const LogIn = () => {
 
     const logInUser = async () => {
       try {
-        await logIn(email, password);
+        const result = await logIn(email, password);
         console.log("user logged in");
-        if (user.emailVerified) {
+        if (result.user.emailVerified) {
           navigate(from, { replace: true });
         } else {
           toast.error("Please verify your email address");
@@ -35,6 +36,8 @@ const LogIn = () => {
         setError("");
       } catch (error) {
         setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
     logInUser();
