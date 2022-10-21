@@ -65,13 +65,17 @@ const Header = () => {
             )}
 
             {user?.photoURL ? (
-              <Image
-                style={{ height: "30px" }}
-                roundedCircle
-                src={user?.photoURL}
-              />
+              <Link to="/profile">
+                <Image
+                  style={{ height: "30px" }}
+                  roundedCircle
+                  src={user?.photoURL}
+                />
+              </Link>
             ) : (
-              <FaUser />
+              <Link to="/profile">
+                <FaUser />
+              </Link>
             )}
 
             <div className="d-block d-lg-none">
